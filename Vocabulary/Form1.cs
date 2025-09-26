@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -122,6 +123,21 @@ namespace Vocabulary
                 UpdateList();
 
                 MessageBox.Show("List has been loaded");
+            }
+        }
+
+        private void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            int chosen = this.listBox1.IndexFromPoint(e.Location);
+            if (chosen != System.Windows.Forms.ListBox.NoMatches)
+            {
+                string selectedItem = this.listBox1.Items[chosen].ToString();
+
+                string word = selectedItem.ToString().Split('-')[0].Trim();
+                string meaning = selectedItem.ToString().Split('-')[1].Trim();
+
+                txtWord.Text = word;
+                txtMeaning.Text = meaning;
             }
         }
     }
